@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./array.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+
+<body onload="dispTodo()">
+    <!-- <div class="offset-4"> -->
+    <div class="container">
+        <div class="row">
+            <div id="responsive" class="col-3 mx-auto border border-2  shadow-lg mt-3">
+                <h1 class="text-center">Plan Your Day</h1>
+                <input type="text" class="form-control my-2" id="inp" placeholder="Input Your Data">
+                <button class="btn btn-danger my-2 form-control" onclick="add()">Add Todo</button>
+                <button class="btn btn-warning my-2 form-control" onclick="delall()">Delete All Todo</button>
+                <button class="btn btn-dark my-2 form-control" onclick="del()">Delete A Todo</button>
+                <button class="btn btn-success my-2 form-control" onclick="edit()">Edit Todo</button>
+                <!-- <button onclick="display()">disp</button> -->
+                <hr/>
+                <div id="disp" class="text-center"></div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        var put = []
+        function add() {
+            if (inp.value == "") {
+                alert
+                    ("Fill In Your Input")
+            }
+            else {
+                put.push(inp.value)
+                inp.value = ""
+                console.log(put);
+                disp.innerHTML = `<h1>${put}</h1>`
+                dispTodo()
+            }
+        }
+        function delall() {
+            var all = confirm("Are you sure")
+            if (all == true) {
+                put.splice(0)
+                disp.innerHTML = `<h1>${put}</h1>`
+            }
+            else {
+                alert("Okay now")
+                // inp.value = ""
+                // console.log(put);
+            }
+        }
+        function del() {
+            // if (inp.value == "") {
+            //     alert("Enter Your Index")
+            // }
+             
+                put.splice(0, 1)
+                // inp.value = ""
+                console.log(put);
+                disp.innerHTML = `<h1>${put}</h1>`
+                dispTodo()
+        }
+        function edit() {
+            var userindex = prompt("Which index did you want to edit")
+            var userResponse = prompt("What did you want to replace you editing")
+            put.splice(userindex, 1, userResponse)
+            disp.innerHTML = `<h1>${put}</h1>`
+        }
+        function dispTodo() {
+            disp.innerHTML = ""
+            for (var index = 0; index < put.length; index++) {
+                console.log(put[index]);
+                disp.innerHTML += `
+                    <h1>${index}</h1>
+                <h1>${put[index]}</h1>
+              <button onclick="delec(${index})" class="btn btn-danger my-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backspace" viewBox="0 0 16 16">
+                <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+                <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+              </svg></button>
+              <button onclick="editing(${index})" class="btn btn-warning my-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder-check" viewBox="0 0 16 16">
+              <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
+              <path d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z"/>
+            </svg></button>
+                          `
+            }
+        }
+        // function delec() {
+        //     put.splice(0,1)
+        //     dispTodo()
+        // }
+        // function editing(){  
+        //     var userin = prompt("which index did you want to edit")
+        //     var userRes = prompt("which one did you want to edit")
+        //     put.splice(userin, 1, userRes)
+        //     dispTodo()
+        // }
+
+        function delec(userindex){
+            put.splice(userindex,1)
+            dispTodo()
+            console.log(put);
+        }
+         function editing(userindex){  
+            var userin = prompt("which index did you want to edit")
+            var userRes = prompt("What did you want to replace you editing")
+            put.splice(userin, 1, userRes)
+            dispTodo()
+        }
+
+
+
+
+
+        // var myname = "ade"
+        // var allnames = ["shola", "ola", "kunle", "samuel", 12, 22, 43]
+        // console.log(allnames[2]);
+        // console.log(allnames.length);
+        // pop remove something from the last index 
+        // allnames.pop()
+        // console.log(allnames)
+        // shift remove something from the first index 
+        // allnames.shift()
+        // console.log(allnames);
+        // push add to the index or thing
+        // allnames.push("tesli")
+        // console.log(allnames);
+        // unshift add from the front 
+        // allnames.unshift ("sqi")
+        // console.log(allnames);
+        // splice can be used to edit or delect and have a starting point and number of item to be delect
+        // farfromhome.splice(2)
+        // console.log(farfromhome);
+        // farfromhome[1] = "frak"
+        //  delete farfromhome[0]
+        // console.log(farfromhome[0]);
+        // disp.innerHTML = `
+        // <h1>${farfromhome[0]}</h1>
+        // <h1>${farfromhome[1]}</h1>
+        // <h1>${farfromhome[2]}</h1>
+        // ` 
+        // var farfromhome = ["isa", "teslim", "ayo", "dele"]
+        // for (var index = 0; index < farfromhome.length; index++) {
+        //   console.log(farfromhome[index]);
+        //   disp.innerHTML +=`<h1>${farfromhome[index]}</h1>`  
+        // }
+        src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    </script>
+</body>
+
+</html>
